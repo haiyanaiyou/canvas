@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>canvas 绘制渐变效果图案</title>
+		<script type="text/javascript">
+			
+			function linear(id){
+				var canvas = document.getElementById(id);
+				if(canvas == null){
+					return false;
+				}
+				var cxt = canvas.getContext('2d');
+				var g1 = cxt.createLinearGradient(0,0,0,300);
+				g1.addColorStop(0,'red');
+				g1.addColorStop(0.5,'orange');
+				g1.addColorStop(1,'blue')
+				cxt.fillStyle = g1;
+				cxt.fillRect(0,0,500,300)
+			}
+			function radial(id){
+				var canvas = document.getElementById(id);
+				if(canvas == null){
+					return false;
+				}
+				/*在同一个圆心画球型*/
+				var cxt = canvas.getContext('2d');
+				var g2 = cxt.createRadialGradient(200,150,0,200,150,100)
+				g2.addColorStop(0,'rgb(255,0,0)')
+				g2.addColorStop(0.5,'rgb(0,255,0)')
+				g2.addColorStop(1,'rgb(0,0,255)')
+				cxt.fillStyle = g2;
+				cxt.beginPath()
+				cxt.arc(200,150,100,0,Math.PI*2,true);
+				cxt.closePath()
+				cxt.fill();
+				
+				/*在不同的圆心画球型*/
+				var canvas = document.getElementById(id)
+				if(canvas == null){
+					return false;
+					
+				}
+				var cxt= canvas.getContext('2d')
+				var g3 = cxt.createRadialGradient(100,150,10,400,150,100)
+				g3.addColorStop(0.1,'rgb(255,0,0)')
+				g3.addColorStop(0.6,'rgb(0,255,0)')
+				g3.addColorStop(1,'rgb(0,0,255)')
+				
+				cxt.fillStyle = g3;
+				
+				
+				cxt.fillRect(0,0,400,300)
+				
+				
+			}
+			window.onload = function(){
+				linear('linear');
+				radial('radial')
+			}
+		</script>
+	</head>
+	<body>
+		<section>
+			<h3>线性渐变 var lg= context.createLinearGradient(xStart,yStart,xEnd,yEnd)</h3>
+			<p>线性渐变颜色 lg.addColorStop(offset,color)</p>
+			<!--
+				xstart:渐变开始点x坐标
+
+			    ystart:渐变开始点y坐标
+			
+			    xEnd:渐变结束点x坐标
+			
+			    yEnd:渐变结束点y坐标
+			
+			    offset:设定的颜色离渐变结束点的偏移量(0~1)
+			
+			    color:绘制时要使用的颜色
+			-->
+			<canvas id="linear" width="600" height="400"></canvas>
+		</section>
+		<section>
+			<h3>径向渐变（发散）var rg=context.createRadialGradient(xStart,yStart,radiusStart,xEnd,yEnd,radiusEnd)</h3>
+			<p>径向渐变（发散）颜色rg.addColorStop(offset,color)</p>
+			<canvas id="radial" width="600" height="400"></canvas>
+			<!--
+				 xStart:发散开始圆心x坐标
+				 
+			    yStart:发散开始圆心y坐标
+			
+			    radiusStart:发散开始圆的半径
+			
+			    xEnd:发散结束圆心的x坐标
+			
+			    yEnd:发散结束圆心的y坐标
+			
+			    radiusEnd:发散结束圆的半径
+			
+			    offset:设定的颜色离渐变结束点的偏移量(0~1)
+			
+			    color:绘制时要使用的颜色
+			-->
+		</section>
+	</body>
+</html>

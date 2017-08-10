@@ -25,6 +25,10 @@
 			<h2>绘制线段 context.moveTo(x,y) context.lineTo(x,y) x y都是坐标</h2>
 			<canvas id="line" width="600" height="200"></canvas>
 		</section>
+		<section>
+			<h2>demo</h2>
+			<canvas id="mum" width="600" height="300"></canvas>
+		</section>
 		<script>
 			function matrix(id){
 				var canvas = document.getElementById(id)
@@ -94,13 +98,56 @@
 				cxt.fillStyle = 'oldlace';
 				cxt.fill()
 			}
-			
+			function line(id){
+				var canvas = document.getElementById(id);
+				if(canvas==null){
+					return false;
+				}
+				var cxt = canvas.getContext('2d');
+				cxt.strokeStyle = 'rosybrown'
+				cxt.fillStyle = 'yellow'
+				cxt.lineTo(100,100)
+   			    cxt.lineTo(200,200);
+				cxt.lineTo(200,100)
+				cxt.moveTo(200,50)
+				cxt.lineTo(100,80)
+				cxt.stroke()
+			}
+			function mum(id){
+				var canvas = document.getElementById(id);
+				if(canvas==null){
+					return false;
+				}
+				var cxt = canvas.getContext('2d');
+				cxt.fillStyle = 'black'
+				cxt.fillRect(0,0,500,300);
+				var n=0;
+				var dx=220;
+				var dy=180;
+				var s=100;
+				cxt.beginPath()
+				cxt.fillStyle = 'gold'
+				cxt.strokeStyle = 'white'
+				var x =Math.sin(0)
+				var y = Math.cos(0)
+				var dig =Math.PI/15 *11
+				for(var i=0;i<30;i++){
+					var x =Math.sin(i*dig);
+					var y =Math.cos(i*dig);
+					cxt.lineTo(dx+x*s,dy+y*s);
+				}
+				cxt.closePath()
+				cxt.fill()
+				cxt.stroke()
+			}
 		
 			window.onload=function(){
 				matrix('matrix');
 				clear('clear');
 				circle('circle');
 				path('path');
+				line('line');
+				mum('mum');
 			}
 		</script>
 	</body>
