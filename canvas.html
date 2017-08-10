@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<section>
+			<h2>绘制矩阵图</h2>
+			<canvas id="matrix" width="800" height="150"></canvas>
+		</section>
+		<section>
+			<h2>清除矩阵区域</h2>
+			<canvas id="clear" width="800" height="200"></canvas>
+		</section>
+		<section>
+			<h2>绘制圆弧 context.arc(圆心的x坐标，圆心的y坐标，半径，开始角度，结束角度，是否逆时针)</h2>
+			<canvas id="circle" width="800" height="200"></canvas>
+		</section>
+		<section>
+			<h2>路径的选择  context.beginPath() context.closePath()</h2>
+			<canvas id="path" width="800" height="200"></canvas>
+		</section>
+		<section>
+			<h2>绘制线段 context.moveTo(x,y) context.lineTo(x,y) x y都是坐标</h2>
+			<canvas id="line" width="600" height="200"></canvas>
+		</section>
+		<script>
+			function matrix(id){
+				var canvas = document.getElementById(id)
+				if(canvas == null){
+					return false;
+				}
+				var context = canvas.getContext('2d');
+				/*默认状态下的矩阵绘制*/
+				context.fillRect(0,0,100,100);
+				context.strokeRect(120,0,100,100);
+				/*更改颜色后的绘制*/
+				context.fillStyle = 'red';
+				context.fillRect(240, 0, 100, 100);
+				context.strokeStyle = 'red';
+				context.strokeRect(360,0, 100,100);
+				/*更改透明度*/
+				context.fillStyle = 'rgba(233,0,0,0.3)';
+				context.fillRect(480,0,100,100);
+			}
+			function clear(id){
+				var canvas = document.getElementById(id);
+				if(canvas == null){
+					return false;
+				}
+				var cxt= canvas.getContext('2d');
+				cxt.fillStyle = 'rgba(134,0,0,0.4)';
+				cxt.fillRect(0,0,200,180);
+				cxt.clearRect(50,50,100,100)
+				
+			}
+			function circle(id){
+				var canvas = document.getElementById(id)
+				if(canvas == null){
+					return false;	
+				}
+				var cxt = canvas.getContext('2d');
+				cxt.beginPath();
+				cxt.arc(100,100,100,0,Math.PI * 2,true);
+				cxt.closePath();
+				cxt.fillStyle = 'blueviolet';
+				cxt.fill();
+				cxt.beginPath()
+				cxt.arc(320,100,100,Math.PI/6, Math.PI*5/6,false)
+				cxt.strokeStyle= 'yellowgreen';
+				cxt.stroke();
+			}
+			function path(id){
+				var canvas = document.getElementById(id);
+				if(canvas == null){
+					return false;	
+				}
+				var cxt = canvas.getContext('2d');
+				var n =0;
+				cxt.beginPath()
+				cxt.arc(100,100,80,0,Math.PI/3,true);
+				cxt.closePath();
+				cxt.fillStyle='aquamarine';
+				cxt.fill();
+				cxt.strokeStyle= 'rosybrown';
+				cxt.stroke();
+				
+				cxt.beginPath();
+				cxt.arc(290,100,90,0,Math.PI/3,false);
+				cxt.closePath();
+				cxt.strokeStyle= 'teal';
+				cxt.stroke();
+				cxt.fillStyle = 'oldlace';
+				cxt.fill()
+			}
+			
+		
+			window.onload=function(){
+				matrix('matrix');
+				clear('clear');
+				circle('circle');
+				path('path');
+			}
+		</script>
+	</body>
+</html>
